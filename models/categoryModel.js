@@ -4,7 +4,7 @@ const categorySchema = Schema(
   {
     name: {
       type: String,
-      required: [true, "Please Enter Category Name"],
+      required: true
     },
   },
   {
