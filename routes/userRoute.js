@@ -1,5 +1,5 @@
 import express from 'express';
-import { getAllUsers, getUserById, register, login, deleteUserById } from '../controllers/userController.js';
+import { getAllUsers, getUserById, register, login, deleteUserById, editUser } from '../controllers/userController.js';
 import { checkAuth } from '../middleware/auth.js';
 
 const routers = express.Router();
@@ -14,5 +14,6 @@ routers.post('/login', login);
 
 routers.delete('/:id',checkAuth, deleteUserById);
 
+routers.patch('/edit/:id', editUser)
 
 export default routers;

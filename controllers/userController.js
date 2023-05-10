@@ -87,7 +87,7 @@ export const login = async (req, res, next) => {
   }
 };
 
-// Generate token
+//**************** Generate token *****************************/ 
 
 const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -95,7 +95,7 @@ const generateToken = (id) => {
   });
 };
 
-//****************** DELETE USER */
+//****************** DELETE USER *******************************/
 export const deleteUserById = async (req, res) => {
   try {
     await userModel.findByIdAndDelete(req.params.id).then((response) => {
@@ -112,4 +112,43 @@ export const deleteUserById = async (req, res) => {
   }
 };
 
+//***************** EDIT USER **********************/
+export const editUser = async (req, res) => {
+  try {
+    const salt = await bcrypt.genSalt(10);
+    let newHashedPassword = bcrypt.hashSync(req.body.password, salt);
+
+    let update = {
+      username: req.body.username,
+      email: req.body.email,
+      password: newHashedPassword,
+      dateOfBirth: req.body.dateOfBirth,
+      gender: req.body.gender,
+      isAdmin: req.body.isAdmin,
+    };
+    const user = await userModel.findById(req.params.id);
+
+    // check if the admin does not exist
+    if (!user) {
+      return res.status(404).json({ status: 404, message: "Not Found" });
+    }
+    if(req.body.username || req.body.email || req.body.phone){
+      return res.status(403).json({ status: 403, message:"Can't change username or email or Phone"});
+    }
+
+    const updatedUser = await userModel.findByIdAndUpdate(
+      req.params.id,
+      { $set: update },
+      {
+        new: true,
+      }
+    );
+
+    res
+      .status(200)
+      .json({ message: "Admin Updated Successfully", changes: updatedUser });
+  } catch (error) {
+    res.json({ err: error.message });
+  }
+};
 
