@@ -1,6 +1,8 @@
 
 import userModel from "../models/userModel.js";
 import bcrypt from "bcryptjs"
+import jwt from "jsonwebtoken"
+
 // *************** GET ALL USERS *********************
 export const getAllUsers = async (req, res, next) => {
   try {
@@ -63,5 +65,35 @@ export const register = async (req, res, next) => {
     res.status(500).json({ message: "Failed to register user", error });
   }
 };
+
+//***************** LOGIN USER ***************/
+
+export const login = async (req, res, next) => {
+  // res.status(200).json({ message: "Login Admin" });
+  let { email, password } = req.body;
+
+  // Check and get the Admin
+  const user = await userModel.findOne({ email });
+
+  if (user && (await bcrypt.compare(password, user.password))) {
+    res.json({
+      _id: user.id,
+      username: user.username,
+      email: user.email,
+      token: generateToken(user._id),
+    });
+  } else {
+    res.status(400).json({ message: "Invalid Credentials" });
+  }
+};
+
+// Generate token
+
+const generateToken = (id) => {
+  return jwt.sign({ id }, process.env.JWT_SECRET, {
+    expiresIn: "24h",
+  });
+};
+
 
 
