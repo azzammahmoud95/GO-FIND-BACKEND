@@ -12,4 +12,5 @@ router.post('/', addCategory);
 router.patch('/:id', updateCategory)
 
 router.delete('/:id', deleteCategory);
+
 export default router;
