@@ -95,5 +95,21 @@ const generateToken = (id) => {
   });
 };
 
+//****************** DELETE USER */
+export const deleteUserById = async (req, res) => {
+  try {
+    await userModel.findByIdAndDelete(req.params.id).then((response) => {
+      if (!response) {
+        res.status(404).send({ status: 404, message: "Not Found" });
+      } else {
+        res
+          .status(200)
+          .send({ status: 200, message: "User Deleted successfully" });
+      }
+    });
+  } catch (error) {
+    res.json({ err: error.message });
+  }
+};
 
 
