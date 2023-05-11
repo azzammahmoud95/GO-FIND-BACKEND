@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import connectDB from './config/db.js';
-
+import cookieParser from 'cookie-parser';
 // Import routes
 import categoryRoutes from './routes/categoryRoute.js';
 import userRoutes from './routes/userRoute.js'
@@ -19,6 +19,7 @@ connectDB();
 const port = process.env.PORT || 5000;
 
 // Use middleware to parse request bodies and enable CORS
+app.use(cookieParser())
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());

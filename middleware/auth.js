@@ -2,7 +2,7 @@ import jwt from "jsonwebtoken";
 
 export const checkAuth = (req, res, next) => {
   try {
-    const token = req.headers.authorization.split(" ")[1];
+    const token = req.cookies.token
 
     if (!token) {
       return res.status(403).send({ message: "Unauthorized. You need to login as a user" });

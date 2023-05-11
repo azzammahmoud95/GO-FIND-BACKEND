@@ -74,14 +74,18 @@ export const login = async (req, res, next) => {
 
   // Check and get the Admin
   const user = await userModel.findOne({ email });
+ const token =  generateToken(user._id)
+ res.cookie('token', token, { httpOnly: true, maxAge: 900000 });
 
   if (user && (await bcrypt.compare(password, user.password))) {
+
     res.json({
       _id: user.id,
       username: user.username,
       email: user.email,
-      token: generateToken(user._id),
+      token: token,
     });
+    const {password, ...otherDetails } = user._doc;
   } else {
     res.status(400).json({ message: "Invalid Credentials" });
   }
