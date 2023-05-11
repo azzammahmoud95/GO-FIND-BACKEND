@@ -1,0 +1,17 @@
+import express from 'express';
+import { addItem, getAllItems,getItemByID, editItem, deleteItem} from '../controllers/itemController.js';
+import { checkAuth } from '../middleware/auth.js';
+import { singleImage } from "../middleware/imageHandler.js";
+const router = express.Router();
+
+router.get('/',getAllItems);
+
+router.get('/:id',getItemByID);
+
+router.post('/additem',singleImage ,addItem );
+
+router.put('/edit/:id',singleImage ,editItem);
+
+router.delete('/delete/:id',deleteItem);
+
+export default router;

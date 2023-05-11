@@ -25,8 +25,8 @@ export const getUserById = async (req, res, next) => {
   }
 };
 
-//***************** REGISTER USER */
-export const register = async (req, res, next) => {
+//***************** REGISTER USER *********************************/
+export const register = async (req, res) => {
   try {
     const { email, password, username, isAdmin, dateOfBirth, phone, gender } = req.body;
 
@@ -46,7 +46,8 @@ export const register = async (req, res, next) => {
     }
 
     const salt = await bcrypt.genSalt(10);
-    const hashPassword = bcrypt.hashSync(password, salt)
+    const hashPassword = bcrypt.hashSync(password, salt);
+
     // Create a new user
     const user = new userModel({
       username,
@@ -55,7 +56,7 @@ export const register = async (req, res, next) => {
       isAdmin,
       dateOfBirth,
       phone,
-      gender 
+      gender,
     });
 
     await user.save();
@@ -65,6 +66,7 @@ export const register = async (req, res, next) => {
     res.status(500).json({ message: "Failed to register user", error });
   }
 };
+
 
 //***************** LOGIN USER ***************/
 

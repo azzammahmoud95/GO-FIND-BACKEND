@@ -6,6 +6,7 @@ import cookieParser from 'cookie-parser';
 // Import routes
 import categoryRoutes from './routes/categoryRoute.js';
 import userRoutes from './routes/userRoute.js'
+import itemRoutes from './routes/itemRoute.js'
 import bodyParser from 'body-parser';
 const app = express();
 
@@ -24,9 +25,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
 
+app.use("/uploads", express.static("./uploads"));
 
 app.use('/api/category', categoryRoutes);
 app.use('/api/user', userRoutes)
+app.use('/api/item',itemRoutes);
 // Error handling middleware
 app.use((err, req, res, next) => {
   const errStatus = err.status || 500;

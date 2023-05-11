@@ -3,14 +3,14 @@ import { addCategory, deleteCategory, getAllCategories, getCategoryById, updateC
 import { checkAuth } from '../middleware/auth.js';
 const router = express.Router();
 
-router.get('/', getAllCategories);
+router.get('/',getAllCategories);
 
 router.get('/:id',getCategoryById);
 
 router.post('/',checkAuth, addCategory);
 
-router.patch('/:id', updateCategory)
+router.patch('/:id', checkAuth,updateCategory)
 
-router.delete('/:id', deleteCategory);
+router.delete('/:id', checkAuth,deleteCategory);
 
 export default router;

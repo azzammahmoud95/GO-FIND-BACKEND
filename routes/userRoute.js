@@ -14,6 +14,6 @@ routers.post('/login', login);
 
 routers.delete('/delete/:id',checkAuth, deleteUserById);
 
-routers.patch('/edit/:id', editUser)
+routers.patch('/edit/:id',checkAuth ,editUser)
 
 export default routers;
