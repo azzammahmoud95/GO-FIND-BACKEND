@@ -8,10 +8,10 @@ router.get('/',getAllItems);
 
 router.get('/:id',getItemByID);
 
-router.post('/additem',singleImage ,addItem );
+router.post('/additem',checkAuth,singleImage ,addItem );
 
-router.put('/edit/:id',singleImage ,editItem);
+router.put('/edit/:id',checkAuth,singleImage ,editItem);
 
-router.delete('/delete/:id',deleteItem);
+router.delete('/delete/:id',checkAuth,deleteItem);
 
 export default router;
