@@ -4,7 +4,7 @@ import { checkAuth } from '../middleware/auth.js';
 
 const routers = express.Router();
 
-routers.get('/',checkAuth, getAllUsers);
+routers.get('/', getAllUsers);
 
 routers.get('/:id',checkAuth ,getUserById);
 
