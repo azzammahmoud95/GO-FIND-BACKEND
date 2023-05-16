@@ -2,7 +2,7 @@ import itemModel from "../models/itemModel.js";
 import fs from 'fs';
 import userModel from "../models/userModel.js";
 import categoryModel from "../models/categoryModel.js";
-
+import locationModel from "../models/locationModel.js";
 // ************ GET ALL ITEMS ****************************
 
 export const getAllItems = async (req, res, next) => {
@@ -30,7 +30,7 @@ export const addItem = async (req, res) => {
     try {
       const userId = await userModel.findById(req.body.userId);
       const categoryId = await categoryModel.findById(req.body.categoryId);
-  
+      const locationId = await locationModel.findById(req.body.locationId);
     //   Check if the userId exists
       if (!userId) {
         return res.status(404).json({ status: 404, message: "User not found" });
@@ -40,12 +40,15 @@ export const addItem = async (req, res) => {
       if (!categoryId) {
         return res.status(404).json({ status: 404, message: "Category not found" });
       }
+      if(!locationId){
+        return res.status(404).json({ status: 404, message: "Location not found"});
+      }
   
       const newItem = new itemModel({
         title: req.body.title,
         description: req.body.description,
         image: req.imagePath,
-        location: req.body.location,
+        locationId: req.body.locationId,
         isFound: req.body.isFound,
         dateFound: req.body.dateFound,
         userId: req.body.userId,
@@ -65,7 +68,7 @@ export const editItem = async (req, res) => {
       title: req.body.title,
       description: req.body.description,
       image: req.imagePath,
-      location: req.body.location,
+      locationId: req.body.locationId,
       isFound: req.body.isFound,
       dateFound: req.body.dateFound,
       userId: req.body.userId,

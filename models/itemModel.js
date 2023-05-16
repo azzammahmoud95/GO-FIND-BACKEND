@@ -1,6 +1,7 @@
 import { Schema, model } from "mongoose";
 import userModel from "./userModel.js";
 import CategoryModel from "./categoryModel.js";
+import locationModel from "./locationModel.js";
 const itemSchema = Schema(
   {
     title: {
@@ -12,8 +13,9 @@ const itemSchema = Schema(
       required: [true, "Please enter a valid email description of a the Item"],
       minLength: [20, "Description must be at least 20 characters"],
     },
-    location: {
-      type: String,
+    locationId: {
+      type: Schema.Types.ObjectId,
+      ref:"location",
       required: [true, "Please enter a location when Could be found"],
     },
     image: {
@@ -46,6 +48,7 @@ const itemSchema = Schema(
 itemSchema.pre(["find", "findOne", "save", "create"], function () {
   this.populate({ path: "categoryId", model: CategoryModel });
   this.populate({ path: "userId", model: userModel });
+  this.populate({ path: "locationId", model: locationModel })
 });
 const itemModel = model("item", itemSchema);
 

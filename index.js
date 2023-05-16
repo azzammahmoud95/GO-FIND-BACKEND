@@ -8,6 +8,7 @@ import categoryRoutes from './routes/categoryRoute.js';
 import userRoutes from './routes/userRoute.js'
 import itemRoutes from './routes/itemRoute.js'
 import bodyParser from 'body-parser';
+import locationRoute from './routes/locationRoute.js'
 const app = express();
 
 // Load environment variables from .env file
@@ -30,6 +31,7 @@ app.use("/uploads", express.static("./uploads"));
 app.use('/api/category', categoryRoutes);
 app.use('/api/user', userRoutes)
 app.use('/api/item',itemRoutes);
+app.use('/api/location', locationRoute)
 // Error handling middleware
 app.use((err, req, res, next) => {
   const errStatus = err.status || 500;
