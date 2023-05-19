@@ -86,7 +86,8 @@ export const login = async (req, res, next) => {
       username: user.username,
       email: user.email,
       token: token,
-      isAdmin: user.isAdmin
+      isAdmin: user.isAdmin,
+      phone: user.phone,
     });
     const {password, ...otherDetails } = user._doc;
   } else {

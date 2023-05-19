@@ -8,7 +8,7 @@ router.get('/',getAllItems);
 
 router.get('/:id',getItemByID);
 
-router.post('/additem',checkAuth,singleImage ,addItem );
+router.post('/additem',singleImage ,addItem );
 
 router.put('/edit/:id',checkAuth,singleImage ,editItem);
 
