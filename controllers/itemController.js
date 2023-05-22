@@ -99,6 +99,25 @@ export const editItem = async (req, res) => {
     res.json({ err: error.message });
   }
 };  
+export const editIsFound = async (req, res) => {
+  try {
+    const { isFound } = req.body;
+    const item = await itemModel.findById(req.params.id);
+
+    // Check if the item does not exist
+    if (!item) {
+      return res.status(404).json({ status: 404, message: "Not Found" });
+    }
+
+    // Update the isFound property of the item
+    item.isFound = isFound;
+    const updatedItem = await item.save();
+
+    res.status(200).json({ message: "Item updated successfully", item: updatedItem });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+}
   
   //******************** Delete a project ***********************/ 
 export const deleteItem = async (req, res) => {
