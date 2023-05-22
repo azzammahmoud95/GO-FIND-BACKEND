@@ -99,7 +99,7 @@ export const login = async (req, res, next) => {
 
 const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
-    expiresIn: "24h",
+    expiresIn: "30d",
   });
 };
 
