@@ -46,6 +46,7 @@ export const addItem = async (req, res) => {
   
       const newItem = new itemModel({
         title: req.body.title,
+        label: req.body.title,
         description: req.body.description,
         image: req.imagePath,
         locationId: req.body.locationId,

@@ -8,6 +8,10 @@ const itemSchema = Schema(
       type: String,
       required: [true, "Please enter  a title"],
     },
+    label: {
+      type: String,
+      required: [true, "Please enter  a label"],
+    },
     description: {
       type: String,
       required: [true, "Please enter a valid email description of a the Item"],
