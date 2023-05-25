@@ -6,14 +6,14 @@ const routers = express.Router();
 
 routers.get('/', getAllUsers);
 
-routers.get('/:id',checkAuth ,getUserById);
+routers.get('/:id' ,getUserById);
 
 routers.post('/register', register);
 
 routers.post('/login', login);
 
-routers.delete('/delete/:id',checkAuth, deleteUserById);
+routers.delete('/delete/:id', deleteUserById);
 
-routers.patch('/edit/:id',checkAuth ,editUser)
+routers.patch('/:id' ,editUser)
 
 export default routers;

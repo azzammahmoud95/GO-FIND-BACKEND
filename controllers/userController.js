@@ -123,16 +123,12 @@ export const deleteUserById = async (req, res) => {
 //***************** EDIT USER **********************/
 export const editUser = async (req, res) => {
   try {
-    const salt = await bcrypt.genSalt(10);
-    let newHashedPassword = bcrypt.hashSync(req.body.password, salt);
 
     let update = {
       username: req.body.username,
       email: req.body.email,
-      password: newHashedPassword,
       dateOfBirth: req.body.dateOfBirth,
       gender: req.body.gender,
-      isAdmin: req.body.isAdmin,
     };
     const user = await userModel.findById(req.params.id);
 
@@ -140,9 +136,9 @@ export const editUser = async (req, res) => {
     if (!user) {
       return res.status(404).json({ status: 404, message: "Not Found" });
     }
-    if(req.body.username || req.body.email || req.body.phone){
-      return res.status(403).json({ status: 403, message:"Can't change username or email or Phone"});
-    }
+    // if(req.body.username || req.body.email || req.body.phone){
+    //   return res.status(403).json({ status: 403, message:"Can't change username or email or Phone"});
+    // }
 
     const updatedUser = await userModel.findByIdAndUpdate(
       req.params.id,

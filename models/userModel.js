@@ -26,7 +26,7 @@ const userSchema = Schema(
       default: "none"
     },
     phone: {
-      type: Number,
+      type: String,
       unique: [true, "This Phone Number is already used. Please try another one."],
       required: [true, "Please enter a Phone Number"],
     },
