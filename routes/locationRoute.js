@@ -7,10 +7,10 @@ router.get('/',getAllLocations);
 
 router.get('/:id',getLocationById);
 
-router.post('/',checkAuth, addLocation);
+router.post('/', addLocation);
 
-router.patch('/:id', checkAuth,updateLocation)
+router.patch('/:id',updateLocation)
 
-router.delete('/:id', checkAuth,deleteLocation);
+router.delete('/:id',deleteLocation);
 
 export default router;

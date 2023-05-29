@@ -7,10 +7,10 @@ router.get('/',getAllCategories);
 
 router.get('/:id',getCategoryById);
 
-router.post('/',checkAuth, addCategory);
+router.post('/', addCategory);
 
-router.patch('/:id', checkAuth,updateCategory)
+router.patch('/:id',updateCategory)
 
-router.delete('/:id', checkAuth,deleteCategory);
+router.delete('/:id',deleteCategory);
 
 export default router;
