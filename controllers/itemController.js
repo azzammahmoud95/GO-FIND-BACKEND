@@ -1,5 +1,5 @@
 import itemModel from "../models/itemModel.js";
-import fs from 'fs';
+// import fs from 'fs';
 import userModel from "../models/userModel.js";
 import categoryModel from "../models/categoryModel.js";
 import locationModel from "../models/locationModel.js";
@@ -48,7 +48,7 @@ export const addItem = async (req, res) => {
         title: req.body.title,
         label: req.body.title,
         description: req.body.description,
-        image: req.imagePath,
+        image: req.body.image,
         locationId: req.body.locationId,
         isFound: req.body.isFound,
         dateFound: req.body.dateFound,
@@ -68,7 +68,7 @@ export const editItem = async (req, res) => {
     let update = {
       title: req.body.title,
       description: req.body.description,
-      image: req.imagePath,
+      image: req.body.image,
       locationId: req.body.locationId,
       isFound: req.body.isFound,
       dateFound: req.body.dateFound,
@@ -83,9 +83,7 @@ export const editItem = async (req, res) => {
     }
 
     // delete the old image
-    if (req.imagePath) {
-      fs.unlinkSync(item.image);
-    }
+    
 
     const updateditem = await itemModel.findByIdAndUpdate(
       req.params.id,
