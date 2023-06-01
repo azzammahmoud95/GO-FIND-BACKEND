@@ -11,6 +11,12 @@ import bodyParser from 'body-parser';
 import locationRoute from './routes/locationRoute.js'
 const app = express();
 
+const corsOptions ={
+    origin:'http://localhost:3000', 
+    credentials:true,            //access-control-allow-credentials:true
+    optionSuccessStatus:200
+}
+app.use(cors(corsOptions));
 // Load environment variables from .env file
 dotenv.config();
 
