@@ -125,7 +125,7 @@ export const deleteItem = async (req, res) => {
         if (!response) {
           res.status(404).send({ status: 404, message: "Not Found" });
         } else {
-          fs.unlinkSync(response.image);
+          // fs.unlinkSync(response.image);
           res.status(200).send({ status: 200, message: "Deleted successfully" });
         }
       });
