@@ -15,7 +15,6 @@ const itemSchema = Schema(
     description: {
       type: String,
       required: [true, "Please enter a valid email description of a the Item"],
-      minLength: [20, "Description must be at least 20 characters"],
     },
     locationId: {
       type: Schema.Types.ObjectId,
